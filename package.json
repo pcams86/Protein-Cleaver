@@ -1,7 +1,8 @@
 {
   "name": "protein-cleaver",
   "version": "1.0",
-  "private": true,
+  "private": false,
+  "homepage": "https://pcams86.github.io/Protein-Cleaver/",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.1",
     "@fortawesome/free-solid-svg-icons": "^6.2.1",

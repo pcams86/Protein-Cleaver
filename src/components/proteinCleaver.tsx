@@ -191,6 +191,14 @@ class ProteinCleaver extends React.Component<
     });
   };
 
+  handleCopyBtnClick = () => {
+    if (!navigator.clipboard) {
+      console.log("navigator does not work :-(");
+    } else {
+      navigator.clipboard.writeText(this.state.output);
+    }
+  };
+
   handleNameDropdownClick = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
@@ -253,9 +261,7 @@ class ProteinCleaver extends React.Component<
             <InputForm
               onSubmit={this.handleSubmit}
               onRunClick={this.handleRunBtnClick}
-              onCopyClick={() => {
-                navigator.clipboard.writeText(this.state.output);
-              }}
+              onCopyClick={this.handleCopyBtnClick}
               onInputChange={this.handleInputChange}
               onRadioClick={this.handleRadioClick}
               isRadioSelected={this.isRadioSelected}

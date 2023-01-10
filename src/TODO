@@ -1,9 +1,5 @@
 Buttons:
 option for exact match or broader result
 
-Drop downs:
-add drop down function to show the qty of gene Names or gene IDs at all times
-
 Error handling:
-require an amino acid value
-require a mutation value
+copy button not working

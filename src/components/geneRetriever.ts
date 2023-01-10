@@ -106,11 +106,6 @@ async function getGeneList(geneName: string) {
     throw new Error("Gene name not found");
   }
 
-  /*TODO: Need to error check how many gene items are returned.
-    0. dropdown is grey and inactive
-    1. dropdown turns  blue
-    2+. dropdown turns yellow*/
-
   let geneList: Gene[] = [];
   let gene: Gene;
   geneName = "";
@@ -198,12 +193,12 @@ function verifyTPM(tpm: string): number {
 export function ctaSequencer(
   proteinSequence: string,
   geneID: string,
-  tpm: string
+  TPM: string
 ): string {
   const flank = "ZZZZZ";
   const flankLength = 5;
   const flankedSequence = flank + proteinSequence + flank;
-
+  let tpm = verifyTPM(TPM);
   let output = "";
   for (let i = 11; i >= 8; i--) {
     let peptideLength = i;
@@ -240,10 +235,15 @@ export function neoSequencer(
   const { name, proteinSequence } = gene;
   const flank = "ZZZZZ";
   let output = "";
-  let { position: aminoAcidPosition } = aminoAcid;
+  let {
+    original: originalAminoAcid,
+    position: aminoAcidPosition,
+    mutation: aminoAcidMutation,
+  } = aminoAcid;
   let mutatedSequence = mutateSequence(proteinSequence, aminoAcid);
   const adjustedPosition = aminoAcidPosition + flankLength;
   mutatedSequence = flank + mutatedSequence + flank;
+  const mutation = originalAminoAcid + aminoAcidPosition + aminoAcidMutation;
 
   let tpm = verifyTPM(TPM);
 
@@ -276,7 +276,7 @@ export function neoSequencer(
       let nTerm = mutatedSequence.substring(nTermStart, nTermEnd);
       let peptide = mutatedSequence.substring(peptideStart, peptideEnd);
       let cTerm = mutatedSequence.substring(cTermStart, cTermEnd);
-      output += `${name},${geneID},${nTerm},${peptide},${cTerm},${tpm}\n`;
+      output += `${name}_${mutation},${geneID},${nTerm},${peptide},${cTerm},${tpm}\n`;
     }
   }
 

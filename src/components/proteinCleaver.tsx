@@ -27,16 +27,16 @@ type ProteinCleaverState = {
   aminoAcid: AminoAcid;
   geneList: Gene[];
   currentGene: Gene;
-  inputLabel: string;
+  inputLabel: "Gene & Mutation" | "Gene Name";
   output: string;
-  selectedRadioBtn: string;
+  selectedRadioBtn: "neoAntigen" | "cta";
   nameHelpText: string;
   tpmHelpText: string;
   errorMessage: string;
-  nameDropdownColor: string;
+  nameDropdownColor: "secondary" | "primary" | "warning";
   nameDropdownDisabled: boolean;
   nameDropdownTitle: string;
-  IDDropdownColor: string;
+  IDDropdownColor: "secondary" | "primary" | "warning";
   IDDropdownDisabled: boolean;
   IDDropdownTitle: string;
 };
@@ -80,16 +80,21 @@ class ProteinCleaver extends React.Component<
   };
 
   handleRadioClick = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedRadioBtn = e.currentTarget.value;
-    let nameHelpText = "";
-    let inputLabel = "";
-    if (selectedRadioBtn === "neoAntigen") {
-      inputLabel = "Gene & Mutation";
-      nameHelpText = "example: MAGEA4_A60D";
-    } else {
-      inputLabel = "Gene Name";
-      nameHelpText = "example: MAGEA4";
+    const selectedRadioBtn = e.currentTarget.value as "cta" | "neoAntigen";
+    let nameHelpText: string;
+    let inputLabel: "Gene & Mutation" | "Gene Name";
+
+    switch (selectedRadioBtn) {
+      case "cta":
+        inputLabel = "Gene & Mutation";
+        nameHelpText = "example: MAGEA4_A60D";
+        break;
+      default:
+        inputLabel = "Gene Name";
+        nameHelpText = "example: MAGEA4";
+        break;
     }
+
     this.setState({
       selectedRadioBtn,
       nameHelpText,
@@ -111,6 +116,25 @@ class ProteinCleaver extends React.Component<
     e.preventDefault();
   };
 
+  runCTA = async () => {
+    const { geneList } = await getCTA(this.state.input);
+    const currentGene = geneList[0];
+    const proteinSequence = currentGene.proteinSequence;
+    const geneID = currentGene.ID[0];
+    const { tpm } = this.state.input;
+    const output = ctaSequencer(proteinSequence, geneID, tpm);
+    return { geneList, output, currentGene };
+  };
+
+  runNeo = async () => {
+    const { aminoAcid, geneList } = await getNeo(this.state.input);
+    const currentGene = geneList[0];
+    const geneID = geneList[0].ID[0];
+    const { tpm } = this.state.input;
+    const output = neoSequencer(currentGene, geneID, tpm, aminoAcid);
+    return { aminoAcid, geneList, currentGene, output };
+  };
+
   handleRunBtnClick = async () => {
     let errorMessage = "";
     let output = "";
@@ -129,66 +153,66 @@ class ProteinCleaver extends React.Component<
     this.setState({ errorMessage, output, geneList });
 
     try {
-      if (this.state.selectedRadioBtn === "cta") {
-        ({ geneList } = await getCTA(this.state.input));
-        currentGene = geneList[0];
-        let proteinSequence = currentGene.proteinSequence;
-        let geneID = currentGene.ID[0];
-        let { tpm } = this.state.input;
-        output = ctaSequencer(proteinSequence, geneID, tpm);
-      } else {
-        ({ aminoAcid, geneList } = await getNeo(this.state.input));
-        currentGene = geneList[0];
-        let geneID = geneList[0].ID[0];
-        let { tpm } = this.state.input;
-        output = neoSequencer(currentGene, geneID, tpm, aminoAcid);
+      switch (this.state.selectedRadioBtn) {
+        case "cta":
+          ({ geneList, output, currentGene } = await this.runCTA());
+          break;
+        default:
+          ({ aminoAcid, geneList, currentGene, output } = await this.runNeo());
+          break;
       }
     } catch (e: any) {
       errorMessage = e.message;
       this.setState({ errorMessage });
     }
 
-    let nameDropdownTitle = `names: ${geneList.length}`;
-    let nameColor: string;
-    let nameDisabled: boolean;
-    let IDDropdownTitle = `IDs: ${geneList[0].ID.length}`;
-    let IDColor: string;
-    let IDDisabled: boolean;
-
-    if (geneList.length === 1) {
-      nameColor = "primary";
-      nameDisabled = false;
-    } else if (geneList.length > 1) {
-      nameColor = "warning";
-      nameDisabled = false;
-    } else {
-      nameColor = "secondary";
-      nameDisabled = true;
-    }
-
-    if (geneList[0].ID.length === 1) {
-      IDColor = "primary";
-      IDDisabled = false;
-    } else if (geneList[0].ID.length > 1) {
-      IDColor = "warning";
-      IDDisabled = false;
-    } else {
-      IDColor = "secondary";
-      IDDisabled = true;
-    }
+    const nameDropdownTitle = `names: ${geneList.length}`;
+    const IDDropdownTitle = `IDs: ${geneList[0].ID.length}`;
+    const {
+      dropdownColor: nameDropdownColor,
+      dropdownDisabled: nameDropdownDisabled,
+    } = this.handleDropdownAttributes(geneList.length);
+    const {
+      dropdownColor: IDDropdownColor,
+      dropdownDisabled: IDDropdownDisabled,
+    } = this.handleDropdownAttributes(geneList[0].ID.length);
 
     this.setState({
       output,
       geneList,
       aminoAcid,
-      nameDropdownColor: nameColor,
       nameDropdownTitle,
-      nameDropdownDisabled: nameDisabled,
-      IDDropdownColor: IDColor,
+      nameDropdownColor,
+      nameDropdownDisabled,
       IDDropdownTitle,
-      IDDropdownDisabled: IDDisabled,
+      IDDropdownColor,
+      IDDropdownDisabled,
       currentGene,
     });
+  };
+
+  handleDropdownAttributes = (value: number) => {
+    let dropdownColor: "secondary" | "primary" | "warning";
+    let dropdownDisabled: boolean;
+    switch (value) {
+      case 0: {
+        dropdownColor = "secondary";
+        dropdownDisabled = true;
+        break;
+      }
+      case 1: {
+        dropdownColor = "primary";
+        dropdownDisabled = false;
+        break;
+      }
+      default: {
+        dropdownColor = "warning";
+        dropdownDisabled = false;
+        break;
+      }
+    }
+
+    return { dropdownColor, dropdownDisabled };
   };
 
   handleCopyBtnClick = () => {
@@ -206,7 +230,7 @@ class ProteinCleaver extends React.Component<
     const { geneList } = { ...this.state };
     const currentGene = geneList.find((x) => x.name === geneName) as Gene;
 
-    let color: string;
+    let color: "secondary" | "primary" | "warning";
 
     if (currentGene.ID.length === 1) {
       color = "primary";
@@ -225,15 +249,19 @@ class ProteinCleaver extends React.Component<
   handleIDDropdownClick = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
-    let { currentGene, input, aminoAcid } = this.state;
+    const { currentGene, input, aminoAcid } = this.state;
     const geneID = e.currentTarget.name;
     let output: string;
 
-    if (this.state.selectedRadioBtn === "cta") {
-      output = ctaSequencer(currentGene.proteinSequence, geneID, input.tpm);
-    } else {
-      output = neoSequencer(currentGene, geneID, input.tpm, aminoAcid);
+    switch (this.state.selectedRadioBtn) {
+      case "cta":
+        output = ctaSequencer(currentGene.proteinSequence, geneID, input.tpm);
+        break;
+      default:
+        output = neoSequencer(currentGene, geneID, input.tpm, aminoAcid);
+        break;
     }
+
     this.setState({ output });
   };
 
@@ -262,31 +290,31 @@ class ProteinCleaver extends React.Component<
               onSubmit={this.handleSubmit}
               onRunClick={this.handleRunBtnClick}
               onCopyClick={this.handleCopyBtnClick}
-              onInputChange={this.handleInputChange}
               onRadioClick={this.handleRadioClick}
+              onNameDropdownClick={this.handleNameDropdownClick}
+              onIDDropdownClick={this.handleIDDropdownClick}
+              onInputChange={this.handleInputChange}
               isRadioSelected={this.isRadioSelected}
-              runDisabled={false}
+              runDisabled={input.name ? false : true}
               copyDisabled={output ? false : true}
               input={input}
               inputLabel={inputLabel}
               tpmHelpText={tpmHelpText}
               errorMessage={errorMessage}
               nameHelpText={nameHelpText}
-              onNameDropdownClick={this.handleNameDropdownClick}
               nameDropdownTitle={nameDropdownTitle}
               nameDropdownColor={nameDropdownColor}
               names={geneList.map((gene) => gene.name)}
               nameDropdownDisabled={nameDropdownDisabled}
-              onIDDropdownClick={this.handleIDDropdownClick}
               IDDropdownTitle={IDDropdownTitle}
               IDDropdownColor={IDDropdownColor}
-              IDs={currentGene.ID}
               IDDropdownDisabled={IDDropdownDisabled}
+              IDs={currentGene.ID}
             />
           </div>
         </div>
         <div className="gap">
-          <Output output={this.state.output} />
+          <Output output={output} />
         </div>
       </div>
     );

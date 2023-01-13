@@ -1,6 +1,7 @@
 import * as React from "react";
 import InputForm from "./inputForm";
 import Output from "./common/output";
+import Email from "./common/email";
 import {
   getNeo,
   getCTA,
@@ -39,6 +40,7 @@ type ProteinCleaverState = {
   IDDropdownColor: "secondary" | "primary" | "warning";
   IDDropdownDisabled: boolean;
   IDDropdownTitle: string;
+  emailAddress: " pcams1986@icloud.com" | " ";
 };
 
 class ProteinCleaver extends React.Component<
@@ -73,6 +75,7 @@ class ProteinCleaver extends React.Component<
     IDDropdownColor: "secondary",
     IDDropdownDisabled: true,
     IDDropdownTitle: "gene IDs",
+    emailAddress: " ",
   };
 
   isRadioSelected = (value: string): boolean => {
@@ -265,6 +268,12 @@ class ProteinCleaver extends React.Component<
     this.setState({ output });
   };
 
+  onEnvelopeClick = () => {
+    let { emailAddress } = this.state;
+    emailAddress = emailAddress === " " ? " pcams1986@icloud.com" : " ";
+    this.setState({ emailAddress: emailAddress });
+  };
+
   render() {
     const {
       input,
@@ -281,9 +290,16 @@ class ProteinCleaver extends React.Component<
       IDDropdownColor,
       IDDropdownTitle,
       IDDropdownDisabled,
+      emailAddress,
     } = this.state;
     return (
       <div className="container">
+        <div className="row">
+          <Email
+            onEnvelopeClick={this.onEnvelopeClick}
+            emailAddress={emailAddress}
+          />
+        </div>
         <div className="row">
           <div className="col">
             <InputForm

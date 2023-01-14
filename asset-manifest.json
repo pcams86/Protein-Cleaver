@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Protein-Cleaver/static/css/main.6c28c17b.css",
-    "main.js": "/Protein-Cleaver/static/js/main.b3fcfdd0.js",
+    "main.js": "/Protein-Cleaver/static/js/main.b1929573.js",
     "static/js/787.bd7c7a8a.chunk.js": "/Protein-Cleaver/static/js/787.bd7c7a8a.chunk.js",
     "static/media/fontawesome-webfont.svg?v=4.7.0": "/Protein-Cleaver/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
     "static/media/fontawesome-webfont.eot": "/Protein-Cleaver/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
@@ -10,11 +10,11 @@
     "static/media/fontawesome-webfont.woff2?v=4.7.0": "/Protein-Cleaver/static/media/fontawesome-webfont.20fd1704ea223900efa9.woff2",
     "index.html": "/Protein-Cleaver/index.html",
     "main.6c28c17b.css.map": "/Protein-Cleaver/static/css/main.6c28c17b.css.map",
-    "main.b3fcfdd0.js.map": "/Protein-Cleaver/static/js/main.b3fcfdd0.js.map",
+    "main.b1929573.js.map": "/Protein-Cleaver/static/js/main.b1929573.js.map",
     "787.bd7c7a8a.chunk.js.map": "/Protein-Cleaver/static/js/787.bd7c7a8a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6c28c17b.css",
-    "static/js/main.b3fcfdd0.js"
+    "static/js/main.b1929573.js"
   ]
 }

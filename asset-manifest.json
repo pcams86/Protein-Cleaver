@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.6a076a16.css",
-    "main.js": "/static/js/main.989574eb.js",
-    "static/js/787.bd7c7a8a.chunk.js": "/static/js/787.bd7c7a8a.chunk.js",
-    "static/media/fontawesome-webfont.svg?v=4.7.0": "/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
-    "static/media/fontawesome-webfont.eot": "/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
-    "static/media/fontawesome-webfont.ttf?v=4.7.0": "/static/media/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
-    "static/media/fontawesome-webfont.woff?v=4.7.0": "/static/media/fontawesome-webfont.f691f37e57f04c152e23.woff",
-    "static/media/fontawesome-webfont.woff2?v=4.7.0": "/static/media/fontawesome-webfont.20fd1704ea223900efa9.woff2",
-    "index.html": "/index.html",
-    "main.6a076a16.css.map": "/static/css/main.6a076a16.css.map",
-    "main.989574eb.js.map": "/static/js/main.989574eb.js.map",
-    "787.bd7c7a8a.chunk.js.map": "/static/js/787.bd7c7a8a.chunk.js.map"
+    "main.css": "/Protein-Cleaver/static/css/main.6c28c17b.css",
+    "main.js": "/Protein-Cleaver/static/js/main.b1929573.js",
+    "static/js/787.bd7c7a8a.chunk.js": "/Protein-Cleaver/static/js/787.bd7c7a8a.chunk.js",
+    "static/media/fontawesome-webfont.svg?v=4.7.0": "/Protein-Cleaver/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
+    "static/media/fontawesome-webfont.eot": "/Protein-Cleaver/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
+    "static/media/fontawesome-webfont.ttf?v=4.7.0": "/Protein-Cleaver/static/media/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
+    "static/media/fontawesome-webfont.woff?v=4.7.0": "/Protein-Cleaver/static/media/fontawesome-webfont.f691f37e57f04c152e23.woff",
+    "static/media/fontawesome-webfont.woff2?v=4.7.0": "/Protein-Cleaver/static/media/fontawesome-webfont.20fd1704ea223900efa9.woff2",
+    "index.html": "/Protein-Cleaver/index.html",
+    "main.6c28c17b.css.map": "/Protein-Cleaver/static/css/main.6c28c17b.css.map",
+    "main.b1929573.js.map": "/Protein-Cleaver/static/js/main.b1929573.js.map",
+    "787.bd7c7a8a.chunk.js.map": "/Protein-Cleaver/static/js/787.bd7c7a8a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6a076a16.css",
-    "static/js/main.989574eb.js"
+    "static/css/main.6c28c17b.css",
+    "static/js/main.b1929573.js"
   ]
 }

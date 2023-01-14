@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/Protein-Cleaver/static/css/main.6c28c17b.css",
-    "main.js": "/Protein-Cleaver/static/js/main.b1929573.js",
-    "static/js/787.bd7c7a8a.chunk.js": "/Protein-Cleaver/static/js/787.bd7c7a8a.chunk.js",
-    "static/media/fontawesome-webfont.svg?v=4.7.0": "/Protein-Cleaver/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
-    "static/media/fontawesome-webfont.eot": "/Protein-Cleaver/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
-    "static/media/fontawesome-webfont.ttf?v=4.7.0": "/Protein-Cleaver/static/media/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
-    "static/media/fontawesome-webfont.woff?v=4.7.0": "/Protein-Cleaver/static/media/fontawesome-webfont.f691f37e57f04c152e23.woff",
-    "static/media/fontawesome-webfont.woff2?v=4.7.0": "/Protein-Cleaver/static/media/fontawesome-webfont.20fd1704ea223900efa9.woff2",
-    "index.html": "/Protein-Cleaver/index.html",
-    "main.6c28c17b.css.map": "/Protein-Cleaver/static/css/main.6c28c17b.css.map",
-    "main.b1929573.js.map": "/Protein-Cleaver/static/js/main.b1929573.js.map",
-    "787.bd7c7a8a.chunk.js.map": "/Protein-Cleaver/static/js/787.bd7c7a8a.chunk.js.map"
+    "main.css": "/proteincleaver/static/css/main.a30ddbb0.css",
+    "main.js": "/proteincleaver/static/js/main.19eb0ccc.js",
+    "static/js/787.bd7c7a8a.chunk.js": "/proteincleaver/static/js/787.bd7c7a8a.chunk.js",
+    "static/media/fontawesome-webfont.svg?v=4.7.0": "/proteincleaver/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
+    "static/media/fontawesome-webfont.eot": "/proteincleaver/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
+    "static/media/fontawesome-webfont.ttf?v=4.7.0": "/proteincleaver/static/media/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
+    "static/media/fontawesome-webfont.woff?v=4.7.0": "/proteincleaver/static/media/fontawesome-webfont.f691f37e57f04c152e23.woff",
+    "static/media/fontawesome-webfont.woff2?v=4.7.0": "/proteincleaver/static/media/fontawesome-webfont.20fd1704ea223900efa9.woff2",
+    "index.html": "/proteincleaver/index.html",
+    "main.a30ddbb0.css.map": "/proteincleaver/static/css/main.a30ddbb0.css.map",
+    "main.19eb0ccc.js.map": "/proteincleaver/static/js/main.19eb0ccc.js.map",
+    "787.bd7c7a8a.chunk.js.map": "/proteincleaver/static/js/787.bd7c7a8a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6c28c17b.css",
-    "static/js/main.b1929573.js"
+    "static/css/main.a30ddbb0.css",
+    "static/js/main.19eb0ccc.js"
   ]
 }

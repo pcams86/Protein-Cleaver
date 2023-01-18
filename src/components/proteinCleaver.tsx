@@ -1,7 +1,6 @@
 import * as React from "react";
 import InputForm from "./inputForm";
 import Output from "./common/output";
-import Email from "./common/email";
 import {
   getNeo,
   getCTA,
@@ -9,6 +8,7 @@ import {
   AminoAcid,
   ctaSequencer,
 } from "./geneRetriever";
+import Mailto from "./common/mailto";
 
 export type Input = {
   name: string;
@@ -29,18 +29,17 @@ type ProteinCleaverState = {
   geneList: Gene[];
   currentGene: Gene;
   inputLabel: "Gene & Mutation" | "Gene Name";
-  output: string;
   selectedRadioBtn: "neoAntigen" | "cta";
+  nameDropdownColor: "secondary" | "primary" | "warning";
+  IDDropdownColor: "secondary" | "primary" | "warning";
+  output: string;
   nameHelpText: string;
   tpmHelpText: string;
   errorMessage: string;
-  nameDropdownColor: "secondary" | "primary" | "warning";
   nameDropdownDisabled: boolean;
   nameDropdownTitle: string;
-  IDDropdownColor: "secondary" | "primary" | "warning";
   IDDropdownDisabled: boolean;
   IDDropdownTitle: string;
-  emailAddress: " pcams1986@icloud.com" | " ";
 };
 
 class ProteinCleaver extends React.Component<
@@ -66,7 +65,7 @@ class ProteinCleaver extends React.Component<
     inputLabel: "Gene & Mutation",
     output: "",
     selectedRadioBtn: "neoAntigen",
-    nameHelpText: "example: MAGEA4_A60D",
+    nameHelpText: "example: SOD1_A60D",
     tpmHelpText: "please enter a number value",
     errorMessage: "",
     nameDropdownColor: "secondary",
@@ -75,7 +74,6 @@ class ProteinCleaver extends React.Component<
     IDDropdownColor: "secondary",
     IDDropdownDisabled: true,
     IDDropdownTitle: "gene IDs",
-    emailAddress: " ",
   };
 
   isRadioSelected = (value: string): boolean => {
@@ -90,11 +88,11 @@ class ProteinCleaver extends React.Component<
     switch (selectedRadioBtn) {
       case "cta":
         inputLabel = "Gene & Mutation";
-        nameHelpText = "example: MAGEA4_A60D";
+        nameHelpText = "example: SOD1_A60D";
         break;
       default:
         inputLabel = "Gene Name";
-        nameHelpText = "example: MAGEA4";
+        nameHelpText = "example: SOD1";
         break;
     }
 
@@ -268,12 +266,6 @@ class ProteinCleaver extends React.Component<
     this.setState({ output });
   };
 
-  onEnvelopeClick = () => {
-    let { emailAddress } = this.state;
-    emailAddress = emailAddress === " " ? " pcams1986@icloud.com" : " ";
-    this.setState({ emailAddress: emailAddress });
-  };
-
   render() {
     const {
       input,
@@ -290,15 +282,16 @@ class ProteinCleaver extends React.Component<
       IDDropdownColor,
       IDDropdownTitle,
       IDDropdownDisabled,
-      emailAddress,
     } = this.state;
     return (
       <div className="container">
         <div className="row">
-          <Email
-            onEnvelopeClick={this.onEnvelopeClick}
-            emailAddress={emailAddress}
-          />
+          <div className="col">
+            <Mailto
+              email="pcams1986@icloud.com"
+              subject="Protein Cleaver feedback"
+            />
+          </div>
         </div>
         <div className="row">
           <div className="col">
